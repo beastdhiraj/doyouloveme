@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proposal</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to right, #ff6ec4, #f3a683);
+            font-family: Arial, sans-serif;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            color: yellow;  /* Changed the color to yellow */
+            animation: colorChange 3s infinite;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .yes-button {
+            background-color: #2ecc71;
+            color: white;
+        }
+
+        .no-button {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .yes-button:hover, .no-button:hover {
+            opacity: 0.8;
+        }
+
+        #response {
+            margin-top: 20px;
+            font-size: 18px;
+            background: linear-gradient(45deg, #ff6ec4, #ff0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .footer img {
+            width: 50px;
+            height: 50px;
+            vertical-align: middle;
+        }
+
+        .footer span {
+            margin-left: 10px;
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -100px;
+            font-size: 40px; /* Adjust size for emojis */
+            animation: floatUp 5s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-120vh);
+                opacity: 0;
+            }
+        }
+
+        @keyframes colorChange {
+            0% { color: red; }
+            50% { color: green; }
+            100% { color: red; }
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .floating-text {
+            animation: float 3s ease-in-out infinite, colorChange 3s ease-in-out infinite;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="main-text">Do You Love Me?</h1>
+        <button class="yes-button" onclick="showLoveMessage()">Yes</button>
+        <button class="no-button" onclick="askAgain()">No</button>
+        <p id="response"></p>
+    </div>
+
+    <div class="footer">
+        <img src="https://i.postimg.cc/1tVgBQ0G/44884218-345707102882519-2446069589734326272-n.jpg" alt="Logo">
+        <span>Created By Devansh</span>
+    </div>
+
+    <script>
+        const pickupLines = [
+            "Are You A Magician? Because Whenever I Look At You, Everyone Else Disappears.",
+            "Do You Have A Map? I Keep Getting Lost In Your Eyes.",
+            "Can You Lend Me A Kiss? I Promise To Give It Back.",
+            "Do You Believe In Love At First Sight, Or Should I Walk By Again?",
+            "Are You A Camera? Because Every Time I Look At You, I Smile.",
+            "If You Were A Vegetable, You’d Be A Cute-Cumber.",
+            "Do You Have A Name, Or Can I Call You Mine?",
+            "Is Your Name Google? Because You Have Everything I’ve Been Searching For.",
+            "Are You Made Of Copper And Tellurium? Because You’re Cu-Te.",
+            "Are You A Wi-Fi Signal? Because I’m Feeling A Connection.",
+            "Do You Have A Sun? Because You Brighten Up My Day.",
+            "Is Your Dad A Boxer? Because You’re A Knockout.",
+            "Are You A Time Traveler? Because I See You In My Future.",
+            "Do You Have A Band-Aid? I Just Scraped My Knee Falling For You.",
+            "Are You A Snowflake? Because I've Fallen For You.",
+            "If You Were A Vegetable, You’d Be A Sweet-Pea.",
+            "Is Your Name Chapstick? Because You’re Da Balm.",
+            "Are You A Parking Ticket? Because You’ve Got ‘Fine’ Written All Over You.",
+            "Do You Have A Pencil? Because I Want To Erase Your Past And Write Our Future.",
+            "Are You A Light Bulb? Because You Brighten Up My Day.",
+            "Do You Have A Compass? Because I Keep Getting Lost In Your Eyes.",
+            "If Beauty Were A Crime, You’d Be Serving A Life Sentence.",
+            "Are You A Secret Agent? Because You’ve Got My Heart On A Mission.",
+            "Can You Lend Me A Dictionary? Because You Just Added Meaning To My Life.",
+            "Is Your Name Chapstick? Because You’re Da Balm."
+        ];
+
+        function showLoveMessage() {
+            const randomLine = pickupLines[Math.floor(Math.random() * pickupLines.length)];
+            const response = document.getElementById("response");
+            const mainText = document.getElementById("main-text");
+            mainText.innerText = "I Love You Too!";
+            mainText.classList.add('floating-text');
+            response.innerHTML = `${randomLine}`;
+            startBalloons();
+            hideButtons();
+            startBackgroundAnimation();
+        }
+
+        function askAgain() {
+            const response = document.getElementById("response");
+            const messages = [
+                "No, You Are Lying! 😠",
+                "Are You Really Sure? 🥺",
+                "Please, Don't Say No! 😟",
+                "I Know You Love Me Too! ❤️",
+                "Don't Break My Heart! 💔",
+                "Come On, Admit It! 😊",
+                "You Can't Deny It Forever! 😏",
+                "I Won't Stop Asking! 🤗",
+                "Say Yes, You Know It's True! 😘",
+                "I'm Waiting For Your Yes! 💕"
+            ];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            response.innerText = randomMessage;
+            response.style.color = "#e74c3c";
+            playPopSound();
+        }
+
+        function hideButtons() {
+            document.querySelector('.yes-button').style.display = 'none';
+            document.querySelector('.no-button').style.display = 'none';
+        }
+
+        function startBalloons() {
+            const heartEmojis = ['❤️', '💛', '💚'];
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => createBalloon(heartEmojis[Math.floor(Math.random() * heartEmojis.length)]), i * 500);
+            }
+        }
+
+        function createBalloon(emoji) {
+            const balloon = document.createElement('div');
+            balloon.className = 'balloon';
+            balloon.innerHTML = emoji;
+            balloon.style.left = `${Math.random() * 100}vw`;
+            document.body.appendChild(balloon);
+
+            balloon.addEventListener('animationend', () => {
+                balloon.remove();
+            });
+        }
+
+        function startBackgroundAnimation() {
+            document.body.style.backgroundSize = "200% 200%";
+            document.body.style.animation = "backgroundAnimation 5s ease infinite";
+        }
+
+        function playPopSound() {
+            const audio = new Audio('https://cdn.pixabay.com/download/audio/2023/05/29/audio_27aa700c26.mp3?filename=pop-94319.mp3');
+            audio.play();
+        }
+    </script>
+</body>
+</html>
